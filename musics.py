@@ -27,16 +27,19 @@ cursor.execute('''
 
 conexao.commit()
 
-def find_user(username):
-    cursor.execute('SELECT * from users WHERE username = ?', username)
-    conexao.commit()
 def insert_music(title, artist, year, album, added_by):
     cursor.execute('INSERT INTO musics (title, artist, year, album, added_by) VALUES (?,?,?,?,?)', (title, artist, year, album, added_by))
     conexao.commit()
 
 insert_music("Thriller", "Michael Jackson", 1983, "X", "Pedro")
+insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", "Gustavo")
+insert_music("Beat It", "Michael Jackson", 1982, "Z", "Gui")
 
-cursor.execute('SELECT * FROM musics')
+def get_all_songs(title, artist, year, album, added_by):
+    cursor.execute('SELECT * FROM musics')
+
+get_all_songs('?', '?', '?', '?', '?')
+
 resultados = cursor.fetchall()
 
 for linha in resultados:
