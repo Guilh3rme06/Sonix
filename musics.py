@@ -23,6 +23,7 @@ def insert_music(title, artist, year, album, added_by):
 
 def get_all_songs():
     cursor.execute('SELECT * FROM musics')
+    return cursor.fetchall()
 
 results = cursor.fetchall()
 
