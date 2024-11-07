@@ -8,15 +8,17 @@ cursor.execute('''
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT,
     age INTEGER,
-    favorite_song TEXT
+    favorite_song integer,
+    FOREIGN KEY (favorite_song) REFERENCES musics(id)
         )
     ''')
 
 connection.commit()
 
-def add_user(username, age, favorite_song):
+def insert_user(username, age, favorite_song):
     cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, ?)', (username, age, favorite_song))
     connection.commit()
+    return cursor.fetchall()
 def find_user(username):
     cursor.execute('SELECT * from users WHERE username = ?', username)
     connection.commit()
@@ -27,15 +29,7 @@ def delete_user(username):
 def get_all_users():
     cursor.execute('SELECT * FROM users')
     connection.commit()
-
-add_user('Pedro', 19, 'Thriller')
-add_user('Gustavo', 19, 'Smooth Criminal')
-add_user('Gui', 19, 'Beat It')
-
-resultados = cursor.fetchall()
-
-for linha in resultados:
-    print(linha)
+    return cursor.fetchall()
 
 cursor.execute('DROP TABLE users')
 connection.commit()
