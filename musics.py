@@ -21,19 +21,11 @@ def insert_music(title, artist, year, album, added_by):
     cursor.execute('INSERT INTO musics (title, artist, year, album, added_by) VALUES (?,?,?,?,?)', (title, artist, year, album, added_by))
     connection.commit()
 
-insert_music("Thriller", "Michael Jackson", 1983, "X", 1)
-insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", 2)
-insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", 2)
-
-def get_all_songs(title, artist, year, album, added_by):
+def get_all_songs():
     cursor.execute('SELECT * FROM musics')
-
-get_all_songs('?', '?', '?', '?', '?')
+    return cursor.fetchall()
 
 results = cursor.fetchall()
-
-for line in results:
-    print(line)
 
 cursor.execute('DROP TABLE musics')
 connection.commit()
