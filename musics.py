@@ -27,6 +27,11 @@ def get_all_songs():
     connection.commit()
     return cursor.fetchall()
 
+def delete_song(title):
+    cursor.execute('DELETE FROM musics WHERE title = ?', title)
+    connection.commit()
+    print('Música removida com sucesso!')
+
 cursor.execute('DROP TABLE musics')
 connection.commit()
 connection.close()
