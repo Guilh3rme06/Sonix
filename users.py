@@ -24,6 +24,7 @@ def find_user(username):
 def delete_user(username):
     cursor.execute('DELETE FROM users WHERE username = ?', username)
     conexao.commit()
+def
 
 add_user('Pedro', 19, 'Thriller')
 add_user('Gustavo', 19, 'Smooth Criminal')
