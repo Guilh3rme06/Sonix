@@ -1,7 +1,7 @@
 import sqlite3
 
-conexao = sqlite3.connect('users.db')
-cursor = conexao.cursor()
+connection = sqlite3.connect('users.db')
+cursor = connection.cursor()
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS users(
@@ -12,30 +12,31 @@ cursor.execute('''
         )
     ''')
 
-conexao.commit()
+connection.commit()
 
 def add_user(username, age, favorite_song):
     cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, ?)', (username, age, favorite_song))
-    conexao.commit()
+    connection.commit()
 def find_user(username):
     cursor.execute('SELECT * from users WHERE username = ?', username)
-    conexao.commit()
+    connection.commit()
     return cursor.fetchall()
 def delete_user(username):
     cursor.execute('DELETE FROM users WHERE username = ?', username)
-    conexao.commit()
-def
+    connection.commit()
+def get_all_users():
+    cursor.execute('SELECT * FROM users')
+    connection.commit()
 
 add_user('Pedro', 19, 'Thriller')
 add_user('Gustavo', 19, 'Smooth Criminal')
 add_user('Gui', 19, 'Beat It')
 
-cursor.execute('SELECT * FROM users')
 resultados = cursor.fetchall()
 
 for linha in resultados:
     print(linha)
 
 cursor.execute('DROP TABLE users')
-conexao.commit()
-conexao.close()
+connection.commit()
+connection.close()
