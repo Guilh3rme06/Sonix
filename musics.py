@@ -20,12 +20,12 @@ connection.commit()
 def insert_music(title, artist, year, album, added_by):
     cursor.execute('INSERT INTO musics (title, artist, year, album, added_by) VALUES (?,?,?,?,?)', (title, artist, year, album, added_by))
     connection.commit()
+    print('Música inserida com sucesso!')
 
 def get_all_songs():
     cursor.execute('SELECT * FROM musics')
+    connection.commit()
     return cursor.fetchall()
-
-results = cursor.fetchall()
 
 cursor.execute('DROP TABLE musics')
 connection.commit()
