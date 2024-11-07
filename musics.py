@@ -24,6 +24,12 @@ def insert_music(title, artist, year, album, added_by):
     connection.commit()
     print('Música inserida com sucesso!')
 
+# Função para encontrar uma música na tabela 'musics'
+def find_music(title):
+    cursor.execute('SELECT * from musics WHERE title = ?', title)
+    connection.commit()
+    return cursor.fetchall()
+
 # Função para obter todas as músicas da tabela 'musics'
 def get_all_songs():
     cursor.execute('SELECT * FROM musics')
