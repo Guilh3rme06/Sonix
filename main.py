@@ -4,7 +4,7 @@ from users import *
 from musics import *
 
 users_data = []
-for i in range(1, 5):
+for i in range(0, 5):
     username = input("Qual é o nome de utilizador?")
     age = int(input("Qual é a idade?"))
     fav_song = input("Música favorita?")
@@ -12,7 +12,7 @@ for i in range(1, 5):
     create_user(username, age, song_id)
 
 musics_data = []
-for i in range(1, 5):
+for i in range(0, 5):
     title = input("Música -> ")
     artist = input("Artista -> ")
     year = int(input("Ano -> "))
