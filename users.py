@@ -19,6 +19,7 @@ connection.commit()
 # Função para criar um utilizador na tabela 'users'
 def create_user(username, age, favorite_song):
     cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, ?)', (username, age, favorite_song))
+    print(f"Utilizador criado com sucesso!")
     connection.commit()
 
 # Função para encontrar um utilizador na tabela 'users'
@@ -37,10 +38,3 @@ def get_all_users():
     cursor.execute('SELECT * FROM users')
     connection.commit()
     return cursor.fetchall()
-
-# Exclui a tabela 'users'
-cursor.execute('DROP TABLE users')
-connection.commit()
-
-# Fecha a conexão com o banco de dados
-connection.close()

@@ -41,10 +41,3 @@ def delete_song(title):
     cursor.execute('DELETE FROM musics WHERE title = ?', title)
     connection.commit()
     print('Música removida com sucesso!')
-
-# Exclui a tabela 'musics'
-cursor.execute('DROP TABLE musics')
-connection.commit()
-
-# Fecha a conexão com o banco de dados
-connection.close()
