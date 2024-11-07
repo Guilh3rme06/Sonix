@@ -23,6 +23,7 @@ def insert_music(title, artist, year, album, added_by):
 
 insert_music("Thriller", "Michael Jackson", 1983, "X", 1)
 insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", 2)
+insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", 2)
 
 def get_all_songs(title, artist, year, album, added_by):
     cursor.execute('SELECT * FROM musics')
