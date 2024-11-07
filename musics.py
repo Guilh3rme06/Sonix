@@ -1,7 +1,7 @@
 import sqlite3
 
-conexao = sqlite3.connect('musics.db')
-cursor = conexao.cursor()
+connection = sqlite3.connect('musics.db')
+cursor = connection.cursor()
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS musics(
@@ -15,21 +15,11 @@ cursor.execute('''
     )
 ''')
 
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS users(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,
-    age INTEGER,
-    favorite_song INTEGER,
-    FOREIGN KEY (favorite_song) REFERENCES musics(id)
-    )
-''')
-
-conexao.commit()
+connection.commit()
 
 def insert_music(title, artist, year, album, added_by):
     cursor.execute('INSERT INTO musics (title, artist, year, album, added_by) VALUES (?,?,?,?,?)', (title, artist, year, album, added_by))
-    conexao.commit()
+    connection.commit()
 
 insert_music("Thriller", "Michael Jackson", 1983, "X", 1)
 insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", 2)
@@ -40,9 +30,11 @@ def get_all_songs(title, artist, year, album, added_by):
 
 get_all_songs('?', '?', '?', '?', '?')
 
-resultados = cursor.fetchall()
+results = cursor.fetchall()
 
-for linha in resultados:
-    print(linha)
+for line in results:
+    print(line)
 
-conexao.close()
+cursor.execute('DROP TABLE musics')
+connection.commit()
+connection.close()
