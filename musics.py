@@ -35,12 +35,12 @@ insert_music("Thriller", "Michael Jackson", 1983, "X", 1)
 insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", 2)
 insert_music("Beat It", "Michael Jackson", 1982, "Z", 3)
 
-def get_all_songs(title, artist, year, album, added_by):
+def get_all_songs():
     cursor.execute('SELECT * FROM musics')
+    conexao.commit()
+    return cursor.fetchall()
 
-get_all_songs('?', '?', '?', '?', '?')
-
-resultados = cursor.fetchall()
+resultados = get_all_songs()
 
 for linha in resultados:
     print(linha)
