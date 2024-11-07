@@ -11,7 +11,7 @@ cursor.execute('''
     year INTEGER,
     album TEXT,
     added_by INTEGER,
-    FOREIGN KEY (added_by) REFERENCES users(username)
+    FOREIGN KEY (added_by) REFERENCES users(id)
     )
 ''')
 
@@ -21,7 +21,7 @@ cursor.execute('''
     username TEXT,
     age INTEGER,
     favorite_song INTEGER,
-    FOREIGN KEY (favorite_song) REFERENCES musics(title)
+    FOREIGN KEY (favorite_song) REFERENCES musics(id)
     )
 ''')
 
@@ -31,9 +31,9 @@ def insert_music(title, artist, year, album, added_by):
     cursor.execute('INSERT INTO musics (title, artist, year, album, added_by) VALUES (?,?,?,?,?)', (title, artist, year, album, added_by))
     conexao.commit()
 
-insert_music("Thriller", "Michael Jackson", 1983, "X", "Pedro")
-insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", "Gustavo")
-insert_music("Beat It", "Michael Jackson", 1982, "Z", "Gui")
+insert_music("Thriller", "Michael Jackson", 1983, "X", 1)
+insert_music("Smooth Criminal", "Michael Jackson", 1987, "Y", 2)
+insert_music("Beat It", "Michael Jackson", 1982, "Z", 3)
 
 def get_all_songs(title, artist, year, album, added_by):
     cursor.execute('SELECT * FROM musics')
