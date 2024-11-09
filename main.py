@@ -1,47 +1,70 @@
+from venv import create
+
 import musics
 import users
-from users import *
-from musics import *
-
-users_data = []
-for i in range(0, 5):
-    username = input("Qual é o nome de utilizador?")
-    age = int(input("Qual é a idade?"))
-    fav_song = input("Música favorita?")
-    song_id = getattr(musics.find_music(fav_song), 'id', i)
-    create_user(username, age, song_id)
-
-musics_data = []
-for i in range(0, 5):
-    title = input("Música -> ")
-    artist = input("Artista -> ")
-    year = int(input("Ano -> "))
-    album = input("Álbum -> ")
-    insert_music(title, artist, year, album, i)
-
-# Listar todas as músicas na biblioteca, incluindo título, artista e ano.
-all_songs = musics.get_all_songs()
-print('Todas as músicas:')
-for song in all_songs:
-    print(song[1] + ' - ' + song[2])
-
-# Consultar todas as músicas adicionadas por um utilizador específico.
-# musics.get_user_songs('miguel')
-
-# Listar todos os utilizadores e as respetivas músicas favoritas.
-all_users = users.get_all_users()
-for user in all_users:
-    print(f"{user[1]} tem {user[2]} - música favorita -> {user[3]}")
-
-# Listar as músicas mais recentes (filtrar por ano).
+from musics import insert_music, find_music
+from users import find_user, change_user_favorite_song, print_all_users, create_user
 
 
-# Exclui a tabela 'musics'
-musics.cursor.execute('DROP TABLE musics')
-musics.connection.commit()
-musics.connection.close()
+def ask_user_prompt(_user):
+    while True:
+        name = _user[1]
+        print(f'\nOlá {name}!')
+        choice = input(
+            f"\n(1) Adicionar Música"
+            f"\n(2) Alterar Música Favorita"
+            f"\n(3) Ver utilizadores"
+            f"\n(4) Sair"
+            f"\nEscolha uma opção: "
+        )
+        match choice:
+            case '1':
+                insert_music(
+                    input('Titulo -> '),
+                    input('Artista -> '),
+                    input('Ano -> '),
+                    input('Álbum -> '),
+                    _user[0])
+            case '2':
+                title = input('Qual é o título da música? ')
+                change_favorite_song(_user[0], title)
+            case '3':
+                print_all_users()
+                break
+            case '4':
+                quit(f'\nAté logo!\n')
+            case _:
+                print("Opção inválida. Tente novamente.")
 
-# Exclui a tabela 'users'
-users.cursor.execute('DROP TABLE users')
-users.connection.commit()
-users.connection.close()
+
+def change_favorite_song(user_id, title):
+    song = find_music(title)
+    if song:
+        change_user_favorite_song(user_id, song[0])
+        print(f"A música favorita foi alterada para '{title}'.")
+    else:
+        print("Não foi possível alterar a música favorita.")
+
+
+def login():
+    user_name = input("Qual é o seu nome? ")
+    user = find_user(user_name)
+
+    if user:
+        musics.uid = user[0]
+        users.uid = user[0]
+        ask_user_prompt(user)
+    else:
+        prompt_create_user = input(f"Utilizador '{user_name}' não encontrado."
+              f"\nCriar novo utilizador?"
+              f"\n(1) Sim"
+              f"\n(2) Não\n")
+        match prompt_create_user:
+            case '1':
+                users.create_user_with_name(user_name)
+                login()
+            case _:
+                quit('Até logo!')
+
+print("\n-------------------Bem-vind@ ao Sonix!-------------------")
+login()
