@@ -1,12 +1,13 @@
 import sqlite3
 
-from musics import find_music, find_music_by_id
+import musics
+from musics import *
 
-# Conecta ao banco de dados 'users.db'
 connection = sqlite3.connect('users.db')
 cursor = connection.cursor()
+uid = 0
+username = ''
 
-# Cria a tabela 'users' se ela não existir
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,22 +20,24 @@ cursor.execute('''
 connection.commit()
 
 
-# Função para criar um utilizador na tabela 'users'
-def create_user():
-    username = input("Qual é o nome de utilizador? ")
-    age = int(input("Qual é a idade? "))
-    cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, 0)', (username, age))
-    print("Utilizador criado com sucesso!")
-    connection.commit()
-
 def create_user_with_name(username):
+    """
+    When the user types their name and is met with the "Unknown user" message,
+    they will be prompted to create a new user with the name they typed in.
+    :param username: The name that was typed previously
+    """
     age = int(input("Qual é a idade? "))
     cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, 0)', (username, age))
     print("Utilizador criado com sucesso!")
     connection.commit()
 
-# Função para encontrar um utilizador na tabela 'users'
-def find_user(username):
+
+def find_user_by_name(username):
+    """
+    Function used to get a specific user by their username.
+    :param username: parameter for SQL query.
+    :return: The specific user if it exists, if not, returns None
+    """
     cursor.execute('SELECT * from users WHERE username = ?', (username,))
     result = cursor.fetchall()
     if result:
@@ -42,29 +45,42 @@ def find_user(username):
     return None
 
 
-# Função para remover um utilizador da tabela 'users' com base no username
-def delete_user(username):
-    cursor.execute('DELETE FROM users WHERE username = ?', (username,))
-    connection.commit()
+def find_user_by_id(user_id):
+    """
+    Function used to get a specific user by their ID.
+    :param user_id: parameter for SQL query.
+    :return: The specific user if it exists, if not, returns None
+    """
+    cursor.execute('SELECT * from users WHERE id = ?', (user_id,))
+    result = cursor.fetchall()
+    if result:
+        return result[0]
+    return None
 
 
 def change_user_favorite_song(uid, sid):
+    """
+    Function used to change a specific user's favorite song.
+    :param uid: User id for SQL query
+    :param sid: Song id for SQL query
+    """
     cursor.execute('UPDATE users SET favorite_song = ? WHERE id = ?', (sid, uid))
     connection.commit()
     print(f'\nMúsica favorita alterada com sucesso!\n')
 
 
-# Função para obter todos os utilizadores da tabela 'users'
 def print_all_users():
+    """
+    Function to print all users with their respective ids, ages and favorite songs.
+    """
     cursor.execute('SELECT * FROM users')
     resultado = cursor.fetchall()
     if not resultado:
-        print('Não há utilizadores.')
-
+        print('\nNão há utilizadores.')
     else:
         print(f'\nUtilizadores:')
         for user in resultado:
-            song = find_music_by_id(user[3])
+            song = musics.find_music_by_id(user[3])
 
             if not song or user[3] == 0:
                 song_msg = 'Sem música favorita.'
@@ -73,4 +89,3 @@ def print_all_users():
 
             print(f'{user[0]} - {user[1]} - {user[2]} anos\n'
                   f'{song_msg}\n')
-
