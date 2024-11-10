@@ -134,7 +134,7 @@ def print_recent_songs():
             else:
                 user_msg = f'Utilizador desconhecido.'
 
-            print(f'({song[3]}){song[0]} - "{song[1]}" de {song[2]}'
+            print(f'({song[3]}) {song[0]} - "{song[1]}" de {song[2]}'
                   f'\nDo Álbum "{song[4]}"'
                   f'\n{user_msg}\n')
         print(f'---------Músicas Recentes---------\n')
