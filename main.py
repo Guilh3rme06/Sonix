@@ -6,8 +6,8 @@ from users import *
 create_user_with_name("Guilherme Rodrigues", 18)
 create_user_with_name("Gustavo Rodrigues", 18)
 create_user_with_name("Pedro Cunha", 18)
-create_user_with_name("Tiago", 27)
-create_user_with_name("Elieser", 54)
+create_user_with_name("Tiago Reis", 27)
+create_user_with_name("Elieser dos Santos", 54)
 
 insert_music("Tikiti", "Azhunky", 2024, "musicas azhunky", "Tiago")
 insert_music("sheets", "jhfly", 2016, "sounds and things", "Elieser")
