@@ -32,11 +32,13 @@ def insert_music(title, artist, year, album, added_by):
     :param album: the songs album
     :param added_by: id of the user that is adding the song
     """
-    cursor.execute('INSERT INTO musics (title, artist, year, album, added_by) VALUES (?,?,?,?,?)',
+    try:
+        cursor.execute('INSERT INTO musics (title, artist, year, album, added_by) VALUES (?,?,?,?,?)',
                    (title, artist, int(year), album, added_by))
-    connection.commit()
-    print('Música inserida com sucesso!')
-
+        connection.commit()
+        print('Música inserida com sucesso!')
+    except ValueError:
+        print("\n --------------------------- Na idade só pode inserir números ---------------------------")
 
 def find_music_by_id(song_id):
     """

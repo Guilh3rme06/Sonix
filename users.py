@@ -26,10 +26,14 @@ def create_user_with_name(username):
     they will be prompted to create a new user with the name they typed in.
     :param username: The name that was typed previously
     """
-    age = int(input("Qual é a idade? "))
-    cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, 0)', (username, age))
-    print("Utilizador criado com sucesso!")
-    connection.commit()
+    try:
+        age = int(input("Qual é a idade? "))
+        cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, 0)', (username, age))
+        connection.commit()
+        print("Utilizador criado com sucesso!")
+    except ValueError:
+        print("\n --------------------------- Na idade só pode inserir números ---------------------------")
+
 
 
 def find_user_by_name(username):
