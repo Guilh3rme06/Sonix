@@ -20,14 +20,15 @@ cursor.execute('''
 connection.commit()
 
 
-def create_user_with_name(username):
+def create_user_with_name(username, age=None):
     """
     When the user types their name and is met with the "Unknown user" message,
     they will be prompted to create a new user with the name they typed in.
     :param username: The name that was typed previously
     """
     try:
-        age = int(input("Qual é a idade? "))
+        if age is None:
+            age = int(input("Qual é a idade? "))
         cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, 0)', (username, age))
         connection.commit()
         print("Utilizador criado com sucesso!")

@@ -3,6 +3,21 @@ import users
 from musics import *
 from users import *
 
+create_user_with_name("Guilherme Rodrigues", 18)
+create_user_with_name("Gustavo Rodrigues", 18)
+create_user_with_name("Pedro Cunha", 18)
+create_user_with_name("Tiago", 27)
+create_user_with_name("Elieser", 54)
+
+insert_music("Tikiti", "Azhunky", 2024, "musicas azhunky", "Tiago")
+insert_music("sheets", "jhfly", 2016, "sounds and things", "Elieser")
+insert_music("Demon", "imagine", 2013, "LOOM", "Guilherme Rodrigues")
+insert_music("Mockingbird", "Eminem", "2010", "Bodied", "Gustavo Rodrigues")
+insert_music("Thriller", "Michael Jackson", "2009", "Thriller", "Pedro Cunha")
+
+
+
+
 def ask_user_prompt(_user):
     """
     Main page of the program. Has all the main prompts to display/insert information or quit.
