@@ -38,7 +38,7 @@ def insert_music(title, artist, year, album, added_by):
         connection.commit()
         print('Música inserida com sucesso!')
     except ValueError:
-        print("\n --------------------------- Na idade só pode inserir números ---------------------------")
+        print("\n --------------------------- Erro ao inserir ano ---------------------------")
 
 def find_music_by_id(song_id):
     """

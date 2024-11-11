@@ -32,7 +32,7 @@ def create_user_with_name(username):
         connection.commit()
         print("Utilizador criado com sucesso!")
     except ValueError:
-        print("\n --------------------------- Na idade só pode inserir números ---------------------------")
+        print("\n --------------------------- Erro ao inserir idade ---------------------------")
 
 
 
