@@ -15,9 +15,6 @@ insert_music("Demon", "imagine", 2013, "LOOM", "Guilherme Rodrigues")
 insert_music("Mockingbird", "Eminem", "2010", "Bodied", "Gustavo Rodrigues")
 insert_music("Thriller", "Michael Jackson", "2009", "Thriller", "Pedro Cunha")
 
-
-
-
 def ask_user_prompt(_user):
     """
     Main page of the program. Has all the main prompts to display/insert information or quit.
