@@ -1,5 +1,5 @@
 from datetime import datetime
-from users import *
+from util_users import *
 
 # Conecta ao banco de dados 'musics.db'
 connection = sqlite3.connect('musics.db')

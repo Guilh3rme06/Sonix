@@ -1,7 +1,7 @@
 import sqlite3
 
-import musics
-from musics import *
+import util_musics
+from util_musics import *
 
 connection = sqlite3.connect('users.db')
 cursor = connection.cursor()
@@ -87,7 +87,7 @@ def print_all_users():
     else:
         print(f'\nUtilizadores:')
         for user in resultado:
-            song = musics.find_music_by_id(user[3])
+            song = util_musics.find_music_by_id(user[3])
 
             if not song or user[3] == 0:
                 song_msg = 'Sem música favorita.'

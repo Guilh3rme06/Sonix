@@ -1,7 +1,7 @@
-import musics
-import users
-from musics import *
-from users import *
+import util_musics
+import util_users
+from util_musics import *
+from util_users import *
 
 create_user_with_name("Guilherme Alves", 18)
 create_user_with_name("Gustavo Rodrigues", 18)
@@ -73,7 +73,7 @@ def logout():
     Prints a goodbye message to the current user and points back to log in.
     :return:
     """
-    print(f'\nAdeus, {users.username}')
+    print(f'\nAdeus, {util_users.username}')
     login()
 
 def login():
@@ -82,12 +82,12 @@ def login():
     """
     user_name = input("\nQual é o seu nome? ")
     user = find_user_by_name(user_name)
-    musics.username = user_name
-    users.username = user_name
+    util_musics.username = user_name
+    util_users.username = user_name
 
     if user:
-        musics.uid = user[0]
-        users.uid = user[0]
+        util_musics.uid = user[0]
+        util_users.uid = user[0]
         ask_user_prompt(user)
     else:
         prompt_create_user = input(f"Utilizador '{user_name}' não encontrado."
