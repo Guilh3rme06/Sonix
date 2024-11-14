@@ -15,6 +15,7 @@ cursor.execute('''
     age INTEGER,
     favorite_song INTEGER,
     FOREIGN KEY (favorite_song) REFERENCES musics(id)
+    CONSTRAINT username UNIQUE(username)
     )
 ''')
 connection.commit()
@@ -32,9 +33,10 @@ def create_user_with_name(username, age=None):
         cursor.execute('INSERT INTO users (username, age, favorite_song) VALUES (?, ?, 0)', (username, age))
         connection.commit()
         print("Utilizador criado com sucesso!")
+    except sqlite3.IntegrityError:
+        print("Erro: Este nome de utilizador já existe. Por favor escolha um nome diferente.")
     except ValueError:
         print("\n --------------------------- Erro ao inserir idade ---------------------------")
-
 
 
 def find_user_by_name(username):

@@ -12,8 +12,8 @@ create_user_with_name("Elieser dos Santos", 54)
 insert_music("Tikiti", "Azhunky", 2024, "musicas azhunky", 4)
 insert_music("sheets", "jhfly", 2016, "sounds and things",5)
 insert_music("Demon", "imagine", 2013, "LOOM", 1)
-insert_music("Mockingbird", "Eminem", "2010", "Bodied", 2)
-insert_music("Thriller", "Michael Jackson", "2009", "Thriller", 3)
+insert_music("Mockingbird", "Eminem", 2010, "Bodied", 2)
+insert_music("Thriller", "Michael Jackson", 2009, "Thriller", 3)
 
 def ask_user_prompt(_user):
     """

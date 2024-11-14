@@ -17,6 +17,7 @@ cursor.execute('''
     album TEXT,
     added_by INTEGER,
     FOREIGN KEY (added_by) REFERENCES users(id)
+    CONSTRAINT title UNIQUE(title)
     )
 ''')
 connection.commit()
@@ -37,6 +38,8 @@ def insert_music(title, artist, year, album, added_by):
                    (title, artist, int(year), album, added_by))
         connection.commit()
         print('Música inserida com sucesso!')
+    except sqlite3.IntegrityError:
+        print("Erro: Esta música já existe. Por favor escolha uma música diferente.")
     except ValueError:
         print("\n --------------------------- Erro ao inserir ano ---------------------------")
 
